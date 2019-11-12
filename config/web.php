@@ -7,14 +7,19 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+	'language' => 'ru_RU',
     'aliases' => [
-        '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+	    '@bower' => '@vendor/bower-asset',
+	    '@npm'   => '@vendor/npm-asset',
+	    '@files' => '/var/www/files/',
+	    '@filesWeb'=>'/files/',
     ],
     'components' => [
+	    'activity'=>['class'=>\app\components\ActivityComponent::class],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'lxcyR239BhdfkIOsdrf9467sDFgf',
+            'baseUrl'=> ''
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -43,14 +48,15 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
+	        'showScriptName' => false,
             'enablePrettyUrl' => true,
-            'showScriptName' => false,
             'rules' => [
+
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];
