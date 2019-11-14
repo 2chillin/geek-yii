@@ -49,13 +49,13 @@ $config = [
         ],
         'db' => $db,
 
-        'urlManager' => [
-	        'showScriptName' => false,
-            'enablePrettyUrl' => true,
-            'rules' => [
-
-            ],
-        ],
+	    'urlManager' => [
+		    'enablePrettyUrl' => true,
+		    'showScriptName' => false,
+		    'rules' => [
+			    // Your rules here
+		    ],
+	    ],
 
     ],
     'params' => $params,
