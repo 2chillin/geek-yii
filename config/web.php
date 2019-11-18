@@ -1,7 +1,7 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+$db = file_exists(__DIR__ . '/db_local.php')?require __DIR__ . '/db_local.php':require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
@@ -24,6 +24,7 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+	    'dao'=>['class'=>\app\components\DAOComponent::class],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
