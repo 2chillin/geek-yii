@@ -10,6 +10,15 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 class SiteController extends BaseController
 {
+
+	public function beforeAction($action)
+	{
+		$this->view->params['lastPage'] = \Yii::$app->session->getFlash('lastPage');
+
+		return true;
+
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
