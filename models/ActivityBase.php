@@ -16,7 +16,6 @@ use Yii;
  * @property int $isBlocked
  * @property int $isRepeat
  * @property int $repeatType
- * @property string $email
  * @property string $createdAt
  * @property int $userId
  * @property Users $user

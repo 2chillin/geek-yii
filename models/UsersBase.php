@@ -9,7 +9,7 @@ use Yii;
  * @property string $passwordHash
  * @property string $authKey
  * @property string $token
- * @property string $createAt
+ * @property string $createdAt
  *
  * @property Activity[] $activities
  */

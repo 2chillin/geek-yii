@@ -68,6 +68,7 @@ class Activity extends ActivityBase
 			//'email'=>'Ваш E-mail',
 			//'repeatEmail'=>'Подтвердите E-mail',
 			'useNotification'=>'Оповещать',
+			'repeatType'=>'Тип повторения',
 			'file'=>'Файлы',
 			'isRepeat'=>'Повторять',
 			'notify'=>'Оповещать'
