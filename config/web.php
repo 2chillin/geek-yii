@@ -15,6 +15,10 @@ $config = [
 	    '@filesWeb'=>'/files/',
     ],
     'components' => [
+	    'rbac'=>['class'=>\app\components\RbacComponent::class],
+    	'authManager' => [
+    		'class' => 'yii\rbac\DbManager'
+	    ],
 	    'activity'=>['class'=>\app\components\ActivityComponent::class],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -25,8 +29,9 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
 	    'dao'=>['class'=>\app\components\DAOComponent::class],
+	    'auth'=>['class'=>\app\components\AuthComponent::class],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\Users',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -75,7 +80,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1', '5.19.192.121'],
     ];
 }
 

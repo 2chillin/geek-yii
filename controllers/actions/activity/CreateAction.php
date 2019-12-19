@@ -8,6 +8,11 @@ class CreateAction extends BaseAction
 {
 	//public $name;
 	public function run() {
+
+		if ( ! \Yii::$app->rbac->canCreateActivity() ) {
+			throw new HttpException( 403, 'Not Auth Action' );
+		}
+
 		$model = new Activity();
 		if (\Yii::$app->request->isPost){
 			$model->load(\Yii::$app->request->post());
@@ -18,7 +23,10 @@ class CreateAction extends BaseAction
 			if(!\Yii::$app->activity->createActivity($model)) {
 				print_r($model->getErrors());
 			}else{
-				return $this->controller->render('view',['model'=>$model]);
+				return $this->controller->render('index',['model'=>$model]);
+			}
+			if(\Yii::$app->activity->addActivity($model)) {
+				return $this->controller->redirect(['/activity/index','id'=>$model->id]);
 			}
 		}
 		return $this->controller->render('create',['model'=>$model]);

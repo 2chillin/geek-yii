@@ -7,6 +7,40 @@ use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 class ActivityComponent extends BaseComponent
 {
+	public $modelClass;
+	public function getModel()
+	{
+		return new $this->modelClass;
+	}
+	public function addActivity(Activity $activity) : bool
+	{
+		$activity->file = UploadedFile::getInstances($activity, 'files');
+		$activity->userId=\Yii::$app->user->getIdentity()->id;
+		// валидация формы
+		if ($activity->validate()) {
+			// проверка наличия и сохранение файлов
+			if ($activity->file) {
+				$activity->file = \Yii::$app->file->saveFiles($activity->file);
+				if (!$activity->file) {
+					return false;
+				}
+			}else{
+				$activity->file=null;
+			}
+			if($activity->save(false)){
+				return true;
+			} else {
+				print_r($activity->getErrors());
+				die;
+			}
+//            if (\Yii::$app->dao->insertActivity($activity)) {
+//                return true;
+//            }
+		}
+		// если валидация формы не прошла
+		return false;
+	}
+
 	public function createActivity(Activity $activity)
 	{
 		$activity->file = UploadedFile::getInstances($activity, 'file');
@@ -26,10 +60,27 @@ class ActivityComponent extends BaseComponent
 
 	public function editActivity(Activity $activity)
 	{
+		$activity->file = UploadedFile::getInstances($activity, 'files');
+		$activity->userId=\Yii::$app->user->getIdentity()->id;
+		// валидация формы
 		if ($activity->validate()) {
-
-			return true;
+			// проверка наличия и сохранение файлов
+			if ($activity->file) {
+				$activity->file = \Yii::$app->file->saveFiles($activity->file);
+				if (!$activity->file) {
+					return false;
+				}
+			}else{
+				$activity->file=null;
+			}
+			if($activity->save(false)){
+				return true;
+			} else {
+				print_r($activity->getErrors());
+				die;
+			}
 		}
+		// если валидация формы не прошла
 		return false;
 	}
 
