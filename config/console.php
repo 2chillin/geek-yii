@@ -1,7 +1,7 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+$db = file_exists(__DIR__ . '/db_local.php') ? (require __DIR__ . '/db_local.php') : (require __DIR__ . '/db.php');
 
 $config = [
     'id' => 'basic-console',
@@ -10,13 +10,14 @@ $config = [
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
         '@tests' => '@app/tests',
     ],
     'components' => [
 	    'authManager' => [
 		    'class' => 'yii\rbac\DbManager'
 	    ],
+	    'activity' => ['class' => \app\components\ActivityComponent::class],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -28,6 +29,19 @@ $config = [
                 ],
             ],
         ],
+	    'mailer' => [
+		    'class' => 'yii\swiftmailer\Mailer',
+		    'useFileTransport' => false,
+		    'enableSwiftMailerLogging' => true,
+		    'transport' => [
+			    'class' => 'Swift_SmtpTransport',
+			    'host' => 'smtp.yandex.ru',
+			    'username' => 'geekbrains@onedeveloper.ru',
+			    'password' => '112358njkz_',
+			    'port' => '587',
+			    'encryption' => 'tls'
+		    ]
+	    ],
         'db' => $db,
     ],
     'params' => $params,

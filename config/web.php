@@ -26,13 +26,20 @@ $config = [
             'baseUrl'=> ''
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\caching\MemCache',
+            'servers' => [
+	            [
+		            'host' => 'localhost',
+		            'port' => 11211
+	            ],
+            ],
+            'useMemcached' => true
         ],
 	    'dao'=>['class'=>\app\components\DAOComponent::class],
 	    'auth'=>['class'=>\app\components\AuthComponent::class],
         'user' => [
             'identityClass' => 'app\models\Users',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => true
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -73,7 +80,7 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1', '5.19.192.121'],
     ];
 
     $config['bootstrap'][] = 'gii';

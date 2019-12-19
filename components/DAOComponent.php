@@ -1,8 +1,9 @@
 <?php
 namespace app\components;
 use yii\base\Component;
+use yii\caching\DbDependency;
+use yii\caching\TagDependency;
 use yii\db\Connection;
-use yii\db\Exception;
 use yii\db\Query;
 class DAOComponent extends Component
 {
@@ -10,23 +11,26 @@ class DAOComponent extends Component
 	{
 		return \Yii::$app->db;
 	}
-	public function getUsersList(): array
+	public function getUsersList(): ?array
 	{
 		$sql='select * from users;';
-		return $this->getConnection()->createCommand($sql)->queryAll();
+		return $this->getConnection()->createCommand($sql)->cache(10)->queryAll();
 	}
-	public function getActivityUser($email): array {
+	public function getActivityUser($email):?array {
 		$sql='select * from activity where userId=:user';
-		return $this->getConnection()->createCommand($sql,[':user'=>$email])->queryAll();
+		return $this->getConnection()->createCommand($sql,[':user'=>$email])
+		            ->cache(15,new DbDependency(['sql' => 'select max(id) from activity where userId='.(int)$email]))->queryAll();
 	}
 	public function getActivity(){
 		$query=new Query();
+//        TagDependency::invalidate(\Yii::$app->cache,'tag1');
 		$record=$query->from('activity')
 		              ->select('*')
 		              ->andWhere(['isBlocked'=>1])
 //            ->andWhere('is=:userd',[':userd' => 3])
                       ->limit(2)
 		              ->orderBy(['dateStart'=>SORT_DESC])
+		              ->cache(10,new TagDependency(['tags' => ['tag1','tag2']]))
 		              ->one($this->getConnection());
 //        ->createCommand()->rawSql;
 		return $record;
@@ -35,6 +39,7 @@ class DAOComponent extends Component
 		$query=new Query();
 		$record=$query->from('activity')
 		              ->select('count(id)')
+		              ->cache(10)
 		              ->scalar($this->getConnection());
 		return $record;
 	}

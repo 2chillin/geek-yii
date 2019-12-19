@@ -12,7 +12,7 @@
 		<?php $form = \yii\bootstrap\ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 		<?= $form->field($model, 'title'); ?>
 		<?= $form->field($model, 'description')->textarea(); ?>
-		<?= $form->field($model, 'dateStart'); ?>
+		<?= $form->field($model, 'dateStart')->widget(DatePicker::className()); ?>
 		<?= $form->field($model, 'dateEnd'); ?>
 		<?= $form->field($model, 'isBlocked')->checkbox(); ?>
 		<?= $form->field($model, 'isRepeat')->checkbox(); ?>
