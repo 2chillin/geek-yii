@@ -2,6 +2,7 @@
 namespace app\models;
 use Yii;
 use yii\web\IdentityInterface;
+use yii\web\User;
 /**
  * This is the model class for table "users".
  *
@@ -10,7 +11,6 @@ use yii\web\IdentityInterface;
  * @property string $passwordHash
  * @property string $authKey
  * @property string $token
- * @property string $createAt
  *
  * @property Activity[] $activities
  */
@@ -55,7 +55,7 @@ class Users extends UsersBase implements IdentityInterface
 	 */
 	public static function findIdentityByAccessToken($token, $type = null)
 	{
-		// TODO: Implement findIdentityByAccessToken() method.
+		return Users::find()->andWhere(['token'=>$token])->one();
 	}
 	/**
 	 * Returns an ID that can uniquely identify a user identity.

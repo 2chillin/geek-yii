@@ -75,4 +75,28 @@ class Activity extends ActivityBase
 
 		];
 	}
+
+	public function fields()
+	{
+		return [
+			'id',
+			'title',
+			'dateStart' => function ($model) {
+				return \Yii::$app->formatter->asDate($model->dateStart, 'd.m.Y');
+			},
+			'duration' => function () {
+				return 0;
+			},
+		];
+	}
+
+	public function extraFields()
+	{
+		return [
+			'user'=>function($model){
+				return $model->user->email;
+			}
+		];
+	}
+
 }

@@ -4,7 +4,7 @@
  */
 ?>
 
-<?=\yii\helpers\Html::a('Вернуться к списку', '/activity/index',['class'=>'btn btn-primary']);?>
+<?=\yii\helpers\Html::a('Вернуться к списку', '/index',['class'=>'btn btn-primary']);?>
 
 <h1>Редактирование активности</h1>
 <div class="row">
@@ -12,7 +12,7 @@
 		<?php $form = \yii\bootstrap\ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 		<?= $form->field($model, 'title'); ?>
 		<?= $form->field($model, 'description')->textarea(); ?>
-		<?= $form->field($model, 'dateStart')->widget(DatePicker::className()); ?>
+		<?= $form->field($model, 'dateStart'); ?>
 		<?= $form->field($model, 'dateEnd'); ?>
 		<?= $form->field($model, 'isBlocked')->checkbox(); ?>
 		<?= $form->field($model, 'isRepeat')->checkbox(); ?>

@@ -11,8 +11,7 @@ class CalendarController extends BaseController
 	{
 		return [
 			'create'=>['class'=>CreateAction::class],
-			'view'=>['class'=>ViewAction::class],
-			'edit'=>['class'=>EditAction::class]
+			'view'=>['class'=>ViewAction::class]
 		];
 	}
 }

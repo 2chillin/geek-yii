@@ -89,7 +89,7 @@ class ActivityComponent extends BaseComponent
 
 		return (new \yii\db\Query)->select('*')->from('activity')
 		                          ->leftJoin('users','`users`.`id`=`activity`.`userId`')
-		                          ->andWhere('notify>0')
+		                          ->andWhere('notify=1')
 		                          ->andWhere('dateStart>=:date',[':date' => date('Y-m-d')])
 		                          ->andWhere('dateStart<=:date1',[':date1' => date('Y-m-d').' 23:59:59'])->all();
 	}
