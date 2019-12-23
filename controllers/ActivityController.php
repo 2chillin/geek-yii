@@ -2,6 +2,7 @@
 namespace app\controllers;
 use app\base\BaseController;
 use app\controllers\actions\activity\CreateAction;
+use app\controllers\actions\activity\EditAction;
 use app\models\Activity;
 use app\models\ActivitySearch;
 use yii\web\HttpException;
@@ -10,7 +11,8 @@ class ActivityController extends BaseController
 	public function actions()
 	{
 		return [
-			'create'=>['class'=>CreateAction::class]
+			'create'=>['class'=>CreateAction::class],
+			'edit'=>['class'=>EditAction::class]
 		];
 	}
 

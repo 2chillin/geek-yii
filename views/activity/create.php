@@ -3,10 +3,11 @@
  * @var $model \app\models\Activity
  */
 ?>
-<?=\yii\helpers\Html::a('Вернуться к списку', '/activity/index',['class'=>'btn btn-primary']);?>
+<?=\yii\helpers\Html::a('Вернуться к списку', '/index',['class'=>'btn btn-primary']);?>
 <h1>Создание активности</h1>
 <div class="row">
     <div class="col-md-4">
+	    <?=\app\widgets\meinWidget\MeinCumpWidget::widget();?>
 		<?php $form = \yii\bootstrap\ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 		<?= $form->field($model, 'title'); ?>
 		<?= $form->field($model, 'description')->textarea(); ?>

@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<?=\yii\helpers\Html::a('Создать активность', '/activity/create',['class'=>'btn btn-success']);?>
+		<?=\yii\helpers\Html::a('Создать активность', '/create',['class'=>'btn btn-success']);?>
 		<?=\yii\grid\GridView::widget([
 			'dataProvider' => $provider,
 			'filterModel' => $model,
@@ -18,7 +18,7 @@
 					'attribute' => 'title',
 					'label' => 'Название активности',
 					'value' => function($model){
-						return \yii\helpers\Html::a($model->title,['/activity/edit', 'id'=>$model->id]);
+						return \yii\helpers\Html::a($model->title,['/edit', 'id'=>$model->id]);
 					},
 					'format'=>'raw'
 				],
